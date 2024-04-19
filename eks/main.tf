@@ -1,49 +1,49 @@
 module "eks" {
-    source = "terraform-aws-modules/eks/aws"
-    version = "~>19.0"
+  source = "terraform-aws-modules/eks/aws"
+  version = "~>20.0"
 
-    cluster_name = "mse-eks"
-    cluster_version = "1.24"
+  cluster_name = local.name
+  cluster_endpoint_public_access = true
 
-    vpc_id = module.vpc.vpc_id
-    subnet_ids = module.vpc.private_subnets
-    cluster_endpoint_public_access = true
-    cluster_endpoint_private_access = true
-
-    cluster_addons = {
-        coredns = {
-            resolve_conflict = "OVERWRITE"
-        }
-        vpc-cni = {
-            resolve_conflict = "OVERWRITE"
-        }
-        kube-proxy = {
-            resolve_conflict = "OVERWRITE"
-        }
-        csi = {
-            resolve_conflict = "OVERWRITE"
-        }
+  cluster_addons = {
+    coredns= {
+      most_recent = true
     }
-
-    manage_aws_auth_configmap = true
-
-    eks_managed_node_groups = {
-        node-group = {
-            desired_capacity = 1
-            max_capacity = 2
-            min_capacity = 1
-            instance_types = ["t3.medium"]
-            
-            tags = {
-                Environment = "mse-esk"
-            }
-        }
-
+    kube-proxy= {
+      most_recent = true
     }
-
-    tags = {
-        terraform = "true"
-        Environment = "mse"
+    vpc-cni= {
+      most_recent = true
     }
-  
-}
+  }
+
+  vpc_id = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
+  control_plane_subnet_ids = module.vpc.intra_subnets
+
+  eks_managed_node_group_defaults = {
+    ami_type = "AL2_x86_64"
+    instance_types = "m5.large"
+
+    attach_cluster_primary_security_group = true
+
+  }
+  eks_managed_node_groups = {
+    ascode-cluster-wg = {
+      min_size = 1
+      max_size = 2
+      desired_size =1
+
+      instance_types = ["t3.large"]
+      capacity_type = "SPOT"
+
+      tags = {
+        ExtraTag = "holamundo"
+      }
+    }
+  }
+  tags = local.tags
+  }
+
+
+

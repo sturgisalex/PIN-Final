@@ -1,18 +1,44 @@
+locals {
+  name = "ascode-cluster"
+  region = "us-east-1"
 
+  vpc_cidr = "10.123.0.0/16"
+  azs = ["us-east-1a", "us-east-1b"]
+
+  private_subnets    = ["10.123.1.0/24", "10.123.2.0/24"]
+  public_subnets     = ["10.123.3.0/24", "10.123.4.0/24"]
+  intra_subnets     = ["10.123.5.0/24", "10.123.6.0/24"]
+
+  tags = {
+    example = local.name
+  }
+}
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
+  version = "~> 4.0"
 
-  name               = "eks_vpc"
-  cidr               = "10.0.0.0/16"
+  name               = local.name
+  cidr               = local.vpc_cidr
 
-    azs                = ["us-east-1a", "us-east-1b", "us-east-1c"]
-    private_subnets    = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-    public_subnets     = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+  azs                = local.azs
+  private_subnets    = local.private_subnets
+  public_subnets     = local.public_subnets
+  intra_subnets = local.intra_subnets
 
-    create_igw         = true
-    enable_nat_gateway = true
-    single_nat_gateway = true
-    tags = {
+  #single_nat_gateway = true
+  #create_igw         = true
+  enable_nat_gateway = true
+
+  public_subnet_tags = {
+    "kubernetes.io/role/elb" = 1
+  }
+
+  private_subnet_tags = {
+    "kubernetes.io/role/internal-elb" = 1
+  }
+  
+  
+  tags = {
         terraform = "true"
         Environment = "eks"
     }

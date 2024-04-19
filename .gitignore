@@ -1,3 +1,9 @@
 ec2/.terraform/
+ec2/.terraform.lock*
+ec2/terraform.tfstate*
 eks/.terraform/
+eks/.terraform.lock*
+eks/terraform.tfstate*
 eks2/.terraform/
+eks2/.terraform.lock*
+eks2/terraform.tfstate*
