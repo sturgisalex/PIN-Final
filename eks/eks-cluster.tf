@@ -3,7 +3,7 @@ module "eks" {
   version = "19.0.4"
 
   cluster_name = local.name
-  #cluster_version = "1.24"
+  cluster_version = "1.24"
     
   vpc_id = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
@@ -15,18 +15,18 @@ module "eks" {
   }
   eks_managed_node_groups = {
     eks-cluster-wg = {
-      name = "Node Group"
+      name = "node-group"
+
+      instance_types = ["t3.small"]
+
       min_size = 1
       max_size = 3
       desired_size = 2
 
-      instance_types = ["t3.small"]
+      
       capacity_type = "SPOT"
 
-      tags = {
-        ExtraTag = "Node MSE"
-      }
+      
     }
   }
-  tags = local.tags
-  }
+}

@@ -9,9 +9,9 @@ module "vpc" {
   private_subnets = local.private_subnets
   public_subnets  = local.public_subnets
   
-  single_nat_gateway = true
-  create_igw         = true
-  enable_nat_gateway = true
+  enable_nat_gateway   = true
+  single_nat_gateway   = true
+  enable_dns_hostnames = true
 
   public_subnet_tags = {
     "kubernetes.io/cluster/${local.name}" = "shared"
