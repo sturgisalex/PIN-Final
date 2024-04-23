@@ -17,7 +17,7 @@ module "eks" {
     eks-cluster-wg = {
       name = "node-group"
 
-      instance_types = ["t3.small"]
+      instance_types = ["t2.micro"]
 
       min_size = 1
       max_size = 3
