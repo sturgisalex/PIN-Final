@@ -3,9 +3,7 @@ helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
 
 kubectl create namespace prometheus
-helm install prometheus prometheus-community/prometheus --namespace
-prometheus --setalertmanager.persistentVolume.storageClass="gp2" --set
-server.persistentVolume.storageClass="gp2"
+helm install prometheus prometheus-community/prometheus --namespace prometheus --setalertmanager.persistentVolume.storageClass="gp2" --set server.persistentVolume.storageClass="gp2"
 
 kubectl get all -n prometheus
 
