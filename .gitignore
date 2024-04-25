@@ -1,9 +1,10 @@
 1-ec2/.terraform/
 1-ec2/.terraform.lock*
 1-ec2/terraform.tfstate*
+1-ec2/mse_keypair.pem
 2-eks/.terraform/
 2-eks/.terraform.lock*
 2-eks/terraform.tfstate*
-eks2/.terraform/
-eks2/.terraform.lock*
-eks2/terraform.tfstate*
+dan copy.sh
+dan.sh
+pasos.txt

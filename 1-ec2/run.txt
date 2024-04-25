@@ -1,0 +1,2 @@
+Crear rol ec2-admin.role y dar permisos Adminaccess
+asignar rol a la instancia ec2.
