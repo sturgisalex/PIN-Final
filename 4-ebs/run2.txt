@@ -1,3 +1,11 @@
+export AWS_PROFIE=stage 
+
+
+
+eksctl utils associate-iam-oidc-provider --cluster eks-cluster --approve
+
+
+
 eksctl create iamserviceaccount \
     --name ebs-csi-controller-sa \
     --namespace kube-system \
@@ -13,4 +21,4 @@ eksctl create iamserviceaccount \
 
 (poner nombre cluster y ID de cuenta AWS correctos)
 
-
+kubectl get pod -n kube-system
