@@ -1,0 +1,18 @@
+1- helm uninstall prometheus --namespace promatehus
+
+2- kubectl delete ns prometheus
+
+3- helm uninstall grafana --namespace grafana
+
+4- kubectl delete ns grafana
+
+5- kubectl delete dep.app/my-nginx -n mse
+
+6- kubectl delete service/my-nginx-svc -n mse
+
+7- kubectl delete ns mse
+
+8- eksctl delete cluster --name eks-cluster
+
+9- Correr en la carpeta ec2 terraform destroy
+

@@ -1,6 +1,0 @@
-kubectl create deployment apache --image=httpd
-kubectl get all
-kubectl expose deployment apache -- type=LoadBalancer --port=80
-kubectl get svc
-(tengo que ver la ip amazon)
-
