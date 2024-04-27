@@ -1,0 +1,8 @@
+1- Ejecutamos el codigo creado en Terraform para realizar   una instacia EC2.
+
+2- Crear rol ec2-admin.role y dar permisos AdmintratorAccess
+asignar rol a la instancia ec2 que creamos
+3- Nos conectamos a dicha instancia a traves de SSH.
+
+4- Clonamos el repositorio "xx":
+git clone https://github.com/xxx/PIN-Final.git

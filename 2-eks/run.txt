@@ -1,0 +1,30 @@
+Creamos el cluster con siguiente codigo:
+
+eksctl create cluster \
+--name eks-cluster \
+--region us-east-1 \
+--node-type t3.small \
+--nodes 3 \
+--with-oidc \
+--ssh-access \
+--ssh-public-key mse_keypair \
+--managed \
+--full-ecr-access \
+--zones us-east-1a,us-east-1b,us-east-1c
+
+Nos conectamos al cluster de la siguiente manera:
+
+aws eks update-kubeconfig --region us-east-1 --name eks-cluster
+
+Comprobamos el cluster listando los nodos:
+
+kubectl get nodes
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+1- Creamos namespace grafana:
+kubectl create namespace grafana
+
+2- Actualizamos repositorios:
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+
+3- Instalamos Grafana:
+helm install grafana grafana/grafana \
+--namespace grafana \
+--set persistence.storageClassName="gp2" \
+--set persistence.enabled=true \
+--set adminPassword='EKS!sAWSome' \
+--values ${HOME}/PIN-Final/grafana.yaml \
+--set service.type=LoadBalancer
+
+3- Comprobamos Grafana:
+kubectl get all -n grafana
+
+4- Obtenemos url:
+export ELB=$(kubectl get svc -n grafana grafana -o jsonpath='{.status.loadBalancer.ingresss[0].hostname}')
+echo "http://$ELB"
+
+5- Obtenemos las contraseña:
+kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+6- Ingresamos a url e imporatmos dashboard 3119 y 6417

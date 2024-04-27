@@ -1,0 +1,16 @@
+1- Realizamos un deploy de nginx:
+kubectl apply -f ./nginx.yaml
+
+2- Verificamos el deply:
+kubectl get pods -o wide
+
+3- Comprobamos su funcionamiento:
+kubectl get svc my-nginx-svc
+
+lb_url="$(kubectl get svc my-nginx-svc | \
+            grep my-nginx-svc | \
+            awk '{print $4}')"
+
+curl -k $lb_url
+
+echo $lb_url
